@@ -4,20 +4,35 @@
 
 using System;
 using System.ComponentModel;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Collections.Generic;
+using XtRay.ParserLib;
+using XtRay.ParserLib.Abstractions;
 
 namespace XtRay.Windows
 {
-    using Common;
-    using Common.Abstractions;
-
-    public partial class TraceBox : UserControl, ITraceUiNode
+    public partial class TraceBox : UserControl, ITraceUiNode, ITraceViewModel
     {
+
+        private static string FormatTimeConcisely(double time)
+        {
+            if (time > 1)
+            {
+                // display as seconds
+                return string.Format("{0:0.00}s", time);
+            }
+            if (time > 0.001)
+            {
+                // display as milliseconds
+                return string.Format("{0:0.00}ms", time * 1000);
+            }
+            // display as microseconds
+            return string.Format("{0:D}\u03bcs", (int)Math.Round(time * 1000000));
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string propertyName)
         {
@@ -84,23 +99,36 @@ namespace XtRay.Windows
             string[] parsed = new string[parameters.Length];
             for (var i = parameters.Length - 1; i >= 0; --i)
             {
-                var _tmp = parameters[i].Split(' ');
-                parsed[i] = _tmp[0];
+                if (!parameters[i].StartsWith("$"))
+                {
+                    if (parameters[i].Length > 20)
+                    {
+                        parsed[i] = "...";
+                    }
+                    else
+                    {
+                        parsed[i] = parameters[i];
+                    }
+                }
+                else
+                {
+                    parsed[i] = parameters[i].Split(' ')[0];
+                }
             }
-            return string.Join(",",parsed);
+            return string.Join(",", parsed);
         }
-        
+
         public string TooltipReturnValue
         {
             get
             {
-                return ReturnValue.Length > 50 ? "Dobule Click to Show Return Value" : ReturnValue;
+                return Trace.ReturnValue.Length > 80 ? "Dobule Click to Show Return Value" : Trace.ReturnValue;
             }
         }
 
         public string ReturnValueVisibility => Trace.ReturnValue?.Length > 0 ? "Visible" : "Hidden";
 
-        public string ReturnValue => Trace.ReturnValue ?? "";
+        public string ReturnValue => Trace.ReturnValue?.Length > 30 ? "..." : Trace.ReturnValue;
         public string FileInfo => Trace.File.Path + " @ L" + Trace.FileLine;
 
         public bool IsExpandable => Trace.Children.Length > 0;
@@ -137,7 +165,10 @@ namespace XtRay.Windows
         }
         public Visibility ProfileInfoVisibility => _profileDataVisible ? Visibility.Visible : Visibility.Collapsed;
 
-        public string TimingInfo => string.Format("{0:0.000}ms / {1:0.000}ms", Trace.SelfTime * 1000, Trace.CumulativeTime * 1000);
+        // TODO: add a setting to switch between concise display and millisecond display
+        public string SelfTimeFormatted => FormatTimeConcisely(Trace.SelfTime);
+
+        public string CumulativeTimeFormatted => FormatTimeConcisely(Trace.CumulativeTime);
 
         public double TotalTimingPercent => Trace.TimePercent;
 
@@ -173,7 +204,8 @@ namespace XtRay.Windows
 
         public void ShowChildren(IEnumerable<FlexibleTraceNode> traces)
         {
-            Action action = () => {
+            Action action = () =>
+            {
                 ChildrenPanel.Children.Clear();
                 foreach (var trace in traces)
                 {
@@ -185,7 +217,8 @@ namespace XtRay.Windows
             if (ChildrenPanel.Dispatcher.CheckAccess())
             {
                 action();
-            } else
+            }
+            else
             {
                 ChildrenPanel.Dispatcher.Invoke(action);
             }

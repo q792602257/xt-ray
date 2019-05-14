@@ -18,10 +18,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XtRay.Console", "XtRay.Cons
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{32C718CF-FD2E-469E-9655-4F56F3CB13AC}"
 	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
 		.gitignore = .gitignore
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XtRay.GtkSharp", "XtRay.GtkSharp\XtRay.GtkSharp.csproj", "{792F50C0-3334-46E7-B24B-FB0997DEF213}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XtRay.GtkSharp", "XtRay.GtkSharp\XtRay.GtkSharp.csproj", "{792F50C0-3334-46E7-B24B-FB0997DEF213}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,8 +36,8 @@ Global
 		{BBCB92B0-A9DC-4D30-B23C-1CC48C70C06E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BBCB92B0-A9DC-4D30-B23C-1CC48C70C06E}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{BBCB92B0-A9DC-4D30-B23C-1CC48C70C06E}.Debug|x86.Build.0 = Debug|Any CPU
-		{BBCB92B0-A9DC-4D30-B23C-1CC48C70C06E}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{BBCB92B0-A9DC-4D30-B23C-1CC48C70C06E}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{BBCB92B0-A9DC-4D30-B23C-1CC48C70C06E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBCB92B0-A9DC-4D30-B23C-1CC48C70C06E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BBCB92B0-A9DC-4D30-B23C-1CC48C70C06E}.Release|x86.ActiveCfg = Debug|Any CPU
 		{BBCB92B0-A9DC-4D30-B23C-1CC48C70C06E}.Release|x86.Build.0 = Debug|Any CPU
 		{8A231553-C6B5-4C61-B0CD-13AE65F0174E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -57,11 +58,12 @@ Global
 		{96E18B06-6074-46DC-B27B-258BC38A7B98}.Release|x86.Build.0 = Release|Any CPU
 		{792F50C0-3334-46E7-B24B-FB0997DEF213}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{792F50C0-3334-46E7-B24B-FB0997DEF213}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{792F50C0-3334-46E7-B24B-FB0997DEF213}.Debug|x86.ActiveCfg = Debug|x86
-		{792F50C0-3334-46E7-B24B-FB0997DEF213}.Debug|x86.Build.0 = Debug|x86
+		{792F50C0-3334-46E7-B24B-FB0997DEF213}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{792F50C0-3334-46E7-B24B-FB0997DEF213}.Debug|x86.Build.0 = Debug|Any CPU
 		{792F50C0-3334-46E7-B24B-FB0997DEF213}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{792F50C0-3334-46E7-B24B-FB0997DEF213}.Release|x86.ActiveCfg = Release|x86
-		{792F50C0-3334-46E7-B24B-FB0997DEF213}.Release|x86.Build.0 = Release|x86
+		{792F50C0-3334-46E7-B24B-FB0997DEF213}.Release|Any CPU.Build.0 = Release|Any CPU
+		{792F50C0-3334-46E7-B24B-FB0997DEF213}.Release|x86.ActiveCfg = Release|Any CPU
+		{792F50C0-3334-46E7-B24B-FB0997DEF213}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
